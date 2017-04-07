@@ -1,10 +1,10 @@
 4
 William Le Blanc
 111-11-1111
-0 0
+0 1
 Sarah Goodman
 111-11-1112
-1 0
+1 2
 Donald Hall
 111-11-1113
 2 0

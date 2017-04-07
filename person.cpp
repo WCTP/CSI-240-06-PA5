@@ -60,20 +60,6 @@ Person::Person(string id, string name, string address, string phoneNumber)
 
 
 /*
-Pre: a Person object
-Post: The current Person object is initialized with the object provided
-Purpose: Intialize the Person object using another Person object
-*/
-Person::Person(const Person &obj)
-{
-   mAddress = obj.mAddress;
-   mId = obj.mId;
-   mName = obj.mName;
-   mPhoneNumber = obj.mPhoneNumber;
-}
-
-
-/*
 Pre: A Person object is instantiated
 Post: None
 Purpose: This is an empty destuctor

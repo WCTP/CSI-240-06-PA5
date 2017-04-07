@@ -14,6 +14,7 @@
 #include "patientOperations.h"
 #include "scheduler.h"
 #include "user.h"
+#include "account.h"
 #include "constants.h"
 
 using namespace std;

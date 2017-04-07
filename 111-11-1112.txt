@@ -1,10 +1,5 @@
-123-45-6789
-John Doe
-123 West Ave, Burlington, VT 05401
-(802) 865 0000
-111-11-1111
 123-12-1234
-Walter Proulx
+Wawa Proulx
 Pearl Hall, Burlington, VT 05401
 (802) 666 7776
 111-11-1112
