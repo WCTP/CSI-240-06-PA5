@@ -27,8 +27,8 @@ retain a copy of this assignment on its database for the purpose of future plagi
 checking)
 */
 
-#ifndef PERSON_H
-#define PERSON_H
+#ifndef _PERSON_H
+#define _PERSON_H
 
 #include <iostream>
 #include <string>
@@ -37,12 +37,16 @@ using namespace std;
 
 class Person
 {
+   private:
+      string mId;
+
    protected:
-      string mId, mAddress, mName, mPhoneNumber;
+      string mAddress, mName, mPhoneNumber;
 
    public:
       Person();
       Person(string id, string name, string address, string phoneNumber);
+      Person(const Person &obj);
       ~Person();
 
       //  assessor

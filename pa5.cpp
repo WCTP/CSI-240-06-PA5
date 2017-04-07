@@ -65,14 +65,13 @@ int main()
    for (i = 0; i < numberOfDoctor; i++)
    {
       for (j = 0; j < NUM_OF_TIME_SLOT; j++)
-		  delete [] scheduler[i][j];
+         delete [] scheduler[i][j];
    }
 
    for (i = 0; i < numberOfDoctor; i++)
       delete [] scheduler[i];
 
    delete [] scheduler;
-
 
    return 0;
 }
