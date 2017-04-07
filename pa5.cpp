@@ -1,6 +1,6 @@
 #include "header.h"
 
-
+/*
 int main()
 {
    Doctor  *doctors = NULL;
@@ -64,14 +64,15 @@ int main()
 
    for (i = 0; i < numberOfDoctor; i++)
    {
-      for (j = 0; j < NUM_OF_TIME_SLOT; j++)
-         delete [] scheduler[i][j];
+      //for (j = 0; j < NUM_OF_TIME_SLOT; j++)
+		  //delete [] scheduler[i][j];
    }
 
    for (i = 0; i < numberOfDoctor; i++)
-      delete [] scheduler[i];
+      //delete [] scheduler[i];
 
-   delete [] scheduler;
+   //delete [] scheduler;
+
 
    return 0;
-}
+}*/

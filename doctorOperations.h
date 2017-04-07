@@ -9,6 +9,7 @@
 
 using namespace std;
 
+int doctorMenu();
 void doctorOperations(Patient **&patients, Doctor doctors[], int numberOfDoctor);
 int  getDoctorIndex(Doctor doctors[], int numberOfDoctor, string doctorName);
 bool isDoctorExist(Doctor doctors[], int numberOfDoctor, string doctorName);
