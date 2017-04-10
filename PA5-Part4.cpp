@@ -4,7 +4,6 @@ int main()
 {
 	Doctor  *doctors = NULL;
 	Patient **patients = NULL;
-	Patient ***scheduler = NULL;
 	int     numberOfDoctor, selection, i = 1, j = 1, patientIndex = -1, doctorIndex = -1;
 	User    users;
 
@@ -82,6 +81,18 @@ int main()
 	for (i = 0; i < numberOfDoctor; i++)
 		storePatient(patients[i], doctors[i]);
 
+	cout << endl << "Deleting Pointers..." << endl;
+	
+	if (doctors != NULL)
+		delete[] doctors;
+
+
+	for (int w = 0; i < numberOfDoctor; i++)
+	{
+		if (patients[w] != NULL)
+			delete[] patients[i];
+	}
+	delete[] patients;
 
 
 	cout << endl << endl;
