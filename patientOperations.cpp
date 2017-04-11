@@ -1,12 +1,54 @@
 #include "patientOperations.h"
 #include "constants.h"
 
-
+/* Pre:		a 2D Patient array, an array of Doctor, 
+ *			and an int of how many doctors are in the 
+ *			Doctor array
+ * Post:	a patient at a certain row will be created 
+ *			in the patients array
+ * Purpose: to add a patient to the 2D patients array
+ *********************************************************/
 void addPatient(Patient **&patients, Doctor doctors[], int numberOfDoctor)
 {
+	Patient patientToAdd;
+	Patient *temp;
+	string docName;
+	int row, col;
+	int i;
+
+	cout << "Enter the patient's information." << endl;
+	cin >> patientToAdd;
+
+	cout << "Enter the Doctor's Name." << endl;
+	getline(cin, docName);
+	
+	if (isPatientExist(patients, doctors, numberOfDoctor, patientToAdd.getId()) != true && isDoctorExist(doctors, numberOfDoctor, docName) == true)
+	{
+		row = getDoctorIndex(doctors, numberOfDoctor, docName);
+
+		temp = new Patient[doctors[row].getNumberOfPatient() + 1];
+
+		for (i = 0; i < doctors[row].getNumberOfPatient(); i++)
+		{
+			temp[i] = patients[row][i];
+		}
+
+		temp[i] = patientToAdd;
+		delete[] patients[row];
+
+		patients[row] = temp;
+		delete[] temp;
+
+		cout << "Patient successfully added!!" << endl;
+	}
 }
 
-
+/* Pre:		2D dynamic Patient array, Doctor array, int,
+ *			string, int&, int&
+ * Post:	patientIndex, doctorIndex
+ * Purpose: find if a patient exists in the 2D array and
+ *			return the indexes via reference passing
+ *********************************************************/
 void getPatientIndex(Patient **patients, Doctor doctors[], int numberOfDoctor, string id,
                      int &patientIndex, int &doctorIndex)
 {
@@ -33,7 +75,12 @@ void getPatientIndex(Patient **patients, Doctor doctors[], int numberOfDoctor, s
 	}
 }
 
-
+/* Pre:		2D dynamic Patient array, Doctor array, int,
+ *			string
+ * Post:	bool
+ * Purpose: searches patient array and returns whether or
+ *			not the patient exists in the array
+ *********************************************************/
 bool isPatientExist(Patient **patients, Doctor doctors[], int numberOfDoctor,
                     string id)
 {
@@ -54,7 +101,10 @@ bool isPatientExist(Patient **patients, Doctor doctors[], int numberOfDoctor,
 	return doesExist;
 }
 
-
+/* Pre:		Patient array, Doctor
+ * Post:	none
+ * Purpose: load patients from a text file into the array
+ *********************************************************/
 void loadPatient(Patient *&patients, Doctor doctor)
 {
 	string id, name, address, phoneNumber, docID;
@@ -89,7 +139,11 @@ void loadPatient(Patient *&patients, Doctor doctor)
 	fin.close();
 }
 
-
+/* Pre:		none
+ * Post:	int
+ * Purpose: display the patient menu and get user input,
+ *			and then return the input
+ *********************************************************/
 int patientMenu()
 {
 	int userInput;
@@ -114,7 +168,11 @@ int patientMenu()
 	return userInput;
 }
 
-
+/* Pre:		2D Patient array, Doctor array, int
+ * Post:	none
+ * Purpose: decide function to call based off of the
+ *			patient menu
+ *********************************************************/
 void patientOperations(Patient **&patients, Doctor doctors[], int numberOfDoctor)
 {
 	int selection;
@@ -143,12 +201,76 @@ void patientOperations(Patient **&patients, Doctor doctors[], int numberOfDoctor
 	} while (selection != EXIT);
 }
 
-
+/* Pre:		a 2D Patient array, an array of Doctor, 
+ *			and an int of how many doctors
+ * Post:	a patient at a certain row will be removed 
+ *			in the patients array
+ * Purpose: to remove a patient from the 2D patients array
+ *********************************************************/
 void removePatient(Patient **&patients, Doctor doctors[], int numberOfDoctor)
 {
+	Patient patientToRemove;
+	string id;
+	Patient *temp;
+	int row, col;
+	int docIndex;
+	int i;
+	bool found;
+
+	cout << "Enter the patient's id to remove." << endl;
+	getline(cin, id);
+
+	if (isPatientExist(patients, doctors, numberOfDoctor, id) == true)
+	{
+		for (row = 0; row < numberOfDoctor; row++)
+		{
+			for (col = 0; col < doctors[row].getNumberOfPatient(); col++)
+			{
+				cout << doctors[row].getNumberOfPatient() << endl;
+
+				if (patients[row][col] == id)
+				{
+					found = true;
+					patients[row][col].setId("");
+					break;
+				}
+			}
+
+			if (found == true)
+			{
+				break;
+			}
+		}
+
+		temp = new Patient[doctors[row].getNumberOfPatient() - 1];
+
+		for (i = 0; i < doctors[row].getNumberOfPatient(); i++)
+		{
+			if (patients[row][i].getId() != "")
+			{
+				temp[i] = patients[row][i];
+			}
+		}
+
+		int subtract = doctors[row].getNumberOfPatient();
+		subtract--;
+
+		doctors[row].setNumberOfPatient(subtract);
+		delete[] patients[row];
+
+		patients[row] = temp;
+		delete[] temp;
+
+		cout << "Patient successfully removed!!" << endl;
+
+	}
 }
 
-
+/* Pre:		2D Patient array, Doctor array, int
+ * Post:	none
+ * Purpose: asks user for ID to search patient and display
+ *			if they exist in the array
+ *********************************************************/
 void searchPatient(Patient **patients, Doctor doctors[], int numberOfDoctor)
 {
 	int row, col;
@@ -178,9 +300,17 @@ void searchPatient(Patient **patients, Doctor doctors[], int numberOfDoctor)
 		doctors[row].display();
 		system("pause");
 	}
+	else
+	{
+		cout << endl << "PATIENT NOT FOUND" << endl;
+	}
 }
 
-
+/* Pre:		Patient array, Doctor
+ * Post:	none
+ * Purpose: stores Patient array into a text file based
+ *			off of Doctor id
+ *********************************************************/
 void storePatient(Patient patients[], Doctor doctor)
 {
 	string id, name, address, phoneNumber;
@@ -207,7 +337,12 @@ void storePatient(Patient patients[], Doctor doctor)
 	fout.close();
 }
 
-
+/* Pre:		2D Patient array, Doctor array, int
+ * Post:	none
+ * Purpose: get user input of ID of patient to change,
+ *			get new name, and change name of specified 
+ *			patient
+ *********************************************************/
 void updatePatient(Patient **patients, Doctor doctors[], int numberOfDoctor)
 {
 	int row, col;
