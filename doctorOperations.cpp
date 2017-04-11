@@ -1,6 +1,11 @@
 #include "doctorOperations.h"
 #include "constants.h"
 
+/* Pre:		none
+ * Post:	int
+ * Purpose: displays Doctor menu and gets input, which is
+ *			returned
+ *********************************************************/
 int doctorMenu()
 {
 	int userInput;
@@ -23,6 +28,11 @@ int doctorMenu()
 	return userInput;
 }
 
+/* Pre:		2D Patient array, Doctor array, int
+ * Post:	none
+ * Purpose: queries user for input and calls proper
+ *			function based off of doctorMenu()
+ *********************************************************/
 void doctorOperations(Patient **&patients, Doctor doctors[], int numberOfDoctor)
 {
 	int selection;
@@ -55,7 +65,11 @@ void doctorOperations(Patient **&patients, Doctor doctors[], int numberOfDoctor)
 	} while (selection != EXIT);
 }
 
-
+/* Pre:		Doctor array, int, string
+ * Post:	int
+ * Purpose: finds the Doctor index in the Doctor array and
+ *			returns index
+ *********************************************************/
 int getDoctorIndex(Doctor doctors[], int numberOfDoctor, string name)
 {
 	int index = -1;
@@ -71,7 +85,12 @@ int getDoctorIndex(Doctor doctors[], int numberOfDoctor, string name)
 	return index;
 }
 
-
+/* Pre:		Doctor array, int, string
+ * Post:	bool
+ * Purpose: finds Doctor in Doctor array and returns 
+ *			confirmation of Doctor being successfully 
+ *			found
+ *********************************************************/
 bool isDoctorExist(Doctor doctors[], int numberOfDoctor, string name)
 {
 	bool doesExist = false;
@@ -87,7 +106,11 @@ bool isDoctorExist(Doctor doctors[], int numberOfDoctor, string name)
 	return doesExist;
 }
 
-
+/* Pre:		Doctor array
+ * Post:	int
+ * Purpose: takes Doctor information from a text file and
+ *			loads up information into Doctor array
+ *********************************************************/
 int loadDoctor(Doctor *&doctors)
 {
 	int numDoctors, index, numOfPatients;
@@ -130,7 +153,10 @@ int loadDoctor(Doctor *&doctors)
 	return numDoctors; 
 }
 
-
+/* Pre:		Doctor array, int
+ * Post:	none
+ * Purpose: takes doctor array and stores in a text file
+ *********************************************************/
 void storeDoctor(Doctor doctors[], int numberOfDoctor)
 {
 	ofstream fout;
