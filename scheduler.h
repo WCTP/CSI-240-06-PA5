@@ -8,11 +8,16 @@
 #include "patient.h"
 #include "doctorOperations.h"
 #include "patientOperations.h"
+#include "constants.h"
 
 using namespace std;
 
 void addAppointment(Patient **&patients, Doctor doctors[], int numberOfDoctor,
                     Patient ***&scheduler);
+void changeAppointment(Patient **&patients, Doctor doctors[], int numberOfDoctor,
+						Patient ***&scheduler);
+int convertDayToInt(string day);
+int convertTimeToInt(string time);
 void displaySchedule(int doctorIndex, Patient ***&scheduler);
 void loadSchedule(Patient ***&scheduler, Doctor doctor[], int numberOfDoctor);
 void removeAppointment(Patient **&patients, Doctor doctors[], int numberOfDoctor,
